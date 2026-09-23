@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>名單決策看板</title>
-<meta name="description" content="Jev 決策模型把每筆廣告名單分成五級並附信心度，業務只看該看的；本頁為示範資料。">
+<meta name="description" content="Jev 決策模型把每筆廣告名單分成五級並附信心度，業務只看該看的。資料已去識別化。">
 <style>
 :root{
   color-scheme:light;
@@ -170,10 +170,10 @@ function hbar(el,rows,total,legendEl,legendItems){
   const W=el.clientWidth||600,LW=120,BH=22,G=10,H=rows.length*(BH+G)+8;
   let s=`<svg width="100%" viewBox="0 0 ${W} ${H}" role="img">`;
   rows.forEach((r,i)=>{
-    const y=i*(BH+G)+4; let x=LW; const rt=r.segs.reduce((a,b)=>a+b.n,0)||1;
+    const y=i*(BH+G)+4; let x=LW; const rt=r.segs.reduce((a,b)=>a+b.n,0);
     s+=`<text x="${LW-10}" y="${y+BH/2+4}" text-anchor="end">${esc(r.label)}</text>`;
     r.segs.forEach(sg=>{ if(!sg.n) return; const w=(W-LW-60)*sg.n/total;
-      s+=`<rect class="seg" x="${x}" y="${y}" width="${Math.max(w-2,1)}" height="${BH}" rx="4" fill="${sg.c}" data-t="${esc(r.label)}｜${esc(sg.zh)} ${sg.n} 筆（${Math.round(sg.n/rt*100)}%）"></rect>`;
+      s+=`<rect class="seg" x="${x}" y="${y}" width="${Math.max(w-2,1)}" height="${BH}" rx="4" fill="${sg.c}" data-t="${esc(r.label)}｜${esc(sg.zh)} ${sg.n} 筆（${Math.round(sg.n/(rt||1)*100)}%）"></rect>`;
       if(w>28) s+=`<text class="val" x="${x+6}" y="${y+BH/2+4}" style="fill:#fff">${sg.n}</text>`;
       x+=w; });
     s+=`<text class="val" x="${x+8}" y="${y+BH/2+4}">${rt}</text>`;
