@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>名單決策看板</title>
+<meta name="description" content="Jev 決策模型把每筆廣告名單分成五級並附信心度，業務只看該看的；本頁為示範資料。">
+<style>
+:root{
+  color-scheme:light;
+  --surface:#fcfcfb;--surface-2:#f2f1ee;--border:#e2e0da;
+  --text:#0b0b0b;--text-2:#52514e;--text-3:#8a8880;
+  --t-priority:#0ca30c;--t-normal:#2a78d6;--t-review:#eda100;--t-reflex:#4a3aa7;--t-invalid:#d03b3b;
+  --src-1:#2a78d6;--src-2:#eb6834;
+  --seq-250:#86b6ef;--seq-400:#3987e5;--seq-550:#1c5cab;
+  --font:"Inter","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--border:#35342f;
+    --text:#ffffff;--text-2:#c3c2b7;--text-3:#8d8c84;
+    --t-normal:#3987e5;--t-review:#c98500;--t-reflex:#9085e9;--src-1:#3987e5;--src-2:#d95926;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--border:#35342f;
+  --text:#ffffff;--text-2:#c3c2b7;--text-3:#8d8c84;
+  --t-normal:#3987e5;--t-review:#c98500;--t-reflex:#9085e9;--src-1:#3987e5;--src-2:#d95926;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 64px}
+header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+h1{font-size:22px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--text-2);font-size:14px;margin:0 0 20px}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:999px;color:var(--text-2);background:var(--surface-2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 28px}
+.tile{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.tile .k{font-size:12px;color:var(--text-2);display:flex;gap:6px;align-items:center}
+.tile .v{font-size:30px;font-weight:650;letter-spacing:-.02em;line-height:1.15;margin-top:4px;font-variant-numeric:tabular-nums}
+.tile .d{font-size:12px;color:var(--text-3);margin-top:2px}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block;flex:none}
+section{margin:0 0 32px}
+h2{font-size:16px;margin:0 0 4px;font-weight:650}
+.lead{color:var(--text-2);font-size:13px;margin:0 0 14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.row2{grid-template-columns:1fr}}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12px;color:var(--text-2);margin:8px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+svg text{font-family:var(--font);fill:var(--text-2);font-size:12px}
+svg .val{fill:var(--text);font-weight:600}
+svg .axis{stroke:var(--border);stroke-width:1}
+.tip{position:fixed;pointer-events:none;background:var(--text);color:var(--surface);font-size:12px;padding:6px 9px;border-radius:6px;opacity:0;transform:translate(-50%,-120%);transition:opacity .08s;white-space:nowrap;z-index:9}
+.tip.on{opacity:1}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--text-2);font-size:12px;padding:8px 8px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:top;font-variant-numeric:tabular-nums}
+tr:hover td{background:var(--surface-2)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-weight:600;white-space:nowrap}
+.act{color:var(--text-2)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.filters button{font:inherit;font-size:12px;padding:5px 10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--text);color:var(--surface);border-color:var(--text)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.step{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-2)}
+.step b{display:block;font-size:13px;margin-bottom:4px}
+.step small{color:var(--text-2);font-size:12px;display:block}
+.step .who{margin-top:8px;font-size:11px;color:var(--text-3)}
+.rules{font-size:13px;color:var(--text-2)}
+.rules li{margin:4px 0}
+footer{color:var(--text-3);font-size:12px;border-top:1px solid var(--border);padding-top:14px;margin-top:8px}
+.conf{height:6px;border-radius:3px;background:var(--border);position:relative;min-width:60px}
+.conf i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:var(--seq-400)}
+.confcell{display:flex;align-items:center;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>名單決策看板</h1>
+  <span class="badge" id="badge">載入中</span>
+</header>
+<p class="sub" id="sub">每筆廣告名單進來 0.3 秒內由決策模型分成五級並附信心度。模型只建議，撥不撥、怎麼撥由業務決定。</p>
+
+<div class="grid" id="tiles"></div>
+
+<section>
+  <h2>五級分布</h2>
+  <p class="lead">業務先撥「優先撥」，「需人看」由主管快速過目，「反射填表」走自動訊息不佔業務時間。</p>
+  <div class="card"><div id="tierbar"></div><div class="legend" id="tierlegend"></div></div>
+</section>
+
+<section class="row2">
+  <div>
+    <h2>廣告素材 × 名單品質</h2>
+    <p class="lead">哪支素材帶進來的人比較像真買家。</p>
+    <div class="card"><div id="adbar"></div><div class="legend" id="adlegend"></div></div>
+  </div>
+  <div>
+    <h2>信心度分布</h2>
+    <p class="lead">低於 0.70 的一律標「需人看」，不交給模型自己決定。</p>
+    <div class="card"><div id="confstrip"></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>名單清單</h2>
+  <p class="lead">依模型建議排序：優先撥在最上面。點分級篩選。</p>
+  <div class="filters" id="filters"></div>
+  <div class="card" style="padding:0;overflow:auto"><table id="tbl"><thead><tr><th>名單</th><th>送出</th><th>素材</th><th>場次</th><th>分級</th><th>信心</th><th>建議動作</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section>
+  <h2>決策流程：模型判斷，人按鍵</h2>
+  <p class="lead">五個判斷點各自一個問題。每一步輸出都附信心度，低信心就停下來交人。</p>
+  <div class="flow">
+    <div class="step"><b>① 名單進來</b><small>真買家／反射填表／無效？值不值得優先撥？</small><span class="who">模型分級 → 業務決定撥打順序</span></div>
+    <div class="step"><b>② 撥打之後</b><small>接通／未接／承諾 → 下一步是再撥、LINE 訊息、還是等活動提醒？</small><span class="who">模型建議節奏 → 業務執行</span></div>
+    <div class="step"><b>③ 活動前</b><small>承諾了但沒選場次、沒答時段 → 缺席風險多高？提醒要多強？</small><span class="who">模型算風險 → 助理發提醒</span></div>
+    <div class="step"><b>④ 活動後</b><small>到場＋業務備註 → 熱／溫／冷／培養，決定資深業務跟誰。</small><span class="who">模型分層 → 主管分配</span></div>
+    <div class="step"><b>⑤ 舊客再啟動</b><small>每一檔新案，舊名單裡誰值得再發 EDM 或再撥？</small><span class="who">模型篩選 → 行銷決定發送</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>分級規則（白話）</h2>
+  <ul class="rules">
+    <li><b>優先撥</b>：資料完整、選了具體場次、有答方便聯絡時段，模型認為值得優先撥（≥0.65）。</li>
+    <li><b>一般撥</b>：像真買家，但意願訊號普通，照順序撥。</li>
+    <li><b>需人看</b>：模型信心低於 0.70，不自作主張，交主管過目。</li>
+    <li><b>反射填表</b>：沒選場次只要人聯絡、沒答時段、姓名欄夾雜訊息、凌晨送出。先走自動訊息，回覆了再撥。</li>
+    <li><b>無效</b>：電話或 Email 形狀明顯假、亂碼、測試資料。不撥，回饋給廣告排除。</li>
+    <li>模型<b>不做</b>：改任何 CRM 狀態、決定撥不撥、算成效數字。這些永遠是人。</li>
+  </ul>
+</section>
+
+<footer id="foot"></footer>
+</div>
+<div class="tip" id="tip"></div>
+<script>
+const TIERS=[
+ {k:"priority",zh:"優先撥",icon:"▲",c:"var(--t-priority)",act:"今天內撥打，優先排資深業務"},
+ {k:"normal",zh:"一般撥",icon:"●",c:"var(--t-normal)",act:"照順序撥打"},
+ {k:"review",zh:"需人看",icon:"◆",c:"var(--t-review)",act:"主管 30 秒過目再分派"},
+ {k:"reflex",zh:"反射填表",icon:"▼",c:"var(--t-reflex)",act:"先發自動訊息，回覆了再撥"},
+ {k:"invalid",zh:"無效",icon:"✕",c:"var(--t-invalid)",act:"不撥，回饋廣告排除"},
+];
+const T=Object.fromEntries(TIERS.map(t=>[t.k,t]));
+const tip=document.getElementById("tip");
+function showTip(e,html){tip.innerHTML=html;tip.classList.add("on");moveTip(e)}
+function moveTip(e){tip.style.left=e.clientX+"px";tip.style.top=(e.clientY-8)+"px"}
+function hideTip(){tip.classList.remove("on")}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+function tiles(leads){
+  const n=leads.length, by=k=>leads.filter(l=>l.tier===k).length;
+  const items=[
+    {k:"名單總數",v:n,d:"本檔累計",c:null},
+    {k:"優先撥",v:by("priority"),d:"業務今天先打",c:T.priority},
+    {k:"需人看",v:by("review"),d:"信心 < 0.70",c:T.review},
+    {k:"反射＋無效",v:by("reflex")+by("invalid"),d:"不佔業務時間",c:T.reflex},
+    {k:"真買家比例",v:Math.round((by("priority")+by("normal"))/n*100)+"%",d:"優先＋一般 ÷ 總數",c:null},
+  ];
+  document.getElementById("tiles").innerHTML=items.map(i=>`<div class="tile"><div class="k">${i.c?`<span class="dot" style="background:${i.c.c}"></span>`:""}${i.k}</div><div class="v">${i.v}</div><div class="d">${i.d}</div></div>`).join("");
+}
+
+function hbar(el,rows,total,legendEl,legendItems){
+  // rows: [{label, segs:[{k,n,c,zh}]}]
+  const W=el.clientWidth||600,LW=120,BH=22,G=10,H=rows.length*(BH+G)+8;
+  let s=`<svg width="100%" viewBox="0 0 ${W} ${H}" role="img">`;
+  rows.forEach((r,i)=>{
+    const y=i*(BH+G)+4; let x=LW; const rt=r.segs.reduce((a,b)=>a+b.n,0)||1;
+    s+=`<text x="${LW-10}" y="${y+BH/2+4}" text-anchor="end">${esc(r.label)}</text>`;
+    r.segs.forEach(sg=>{ if(!sg.n) return; const w=(W-LW-60)*sg.n/total;
+      s+=`<rect class="seg" x="${x}" y="${y}" width="${Math.max(w-2,1)}" height="${BH}" rx="4" fill="${sg.c}" data-t="${esc(r.label)}｜${esc(sg.zh)} ${sg.n} 筆（${Math.round(sg.n/rt*100)}%）"></rect>`;
+      if(w>28) s+=`<text class="val" x="${x+6}" y="${y+BH/2+4}" style="fill:#fff">${sg.n}</text>`;
+      x+=w; });
+    s+=`<text class="val" x="${x+8}" y="${y+BH/2+4}">${rt}</text>`;
+  });
+  s+=`</svg>`; el.innerHTML=s;
+  el.querySelectorAll(".seg").forEach(r=>{r.addEventListener("mousemove",e=>showTip(e,r.dataset.t));r.addEventListener("mouseleave",hideTip)});
+  if(legendEl) legendEl.innerHTML=legendItems.map(t=>`<span><span class="dot" style="background:${t.c}"></span>${t.icon||""} ${t.zh}</span>`).join("");
+}
+
+function tierChart(leads){
+  const rows=TIERS.map(t=>({label:`${t.icon} ${t.zh}`,segs:[{k:t.k,n:leads.filter(l=>l.tier===t.k).length,c:t.c,zh:t.zh}]}));
+  hbar(document.getElementById("tierbar"),rows,leads.length,null,[]);
+}
+function adChart(leads){
+  const ads=[...new Set(leads.map(l=>l.ad))];
+  const rows=ads.map(a=>({label:a.replace(/^Aldar-/,""),segs:TIERS.map(t=>({k:t.k,n:leads.filter(l=>l.ad===a&&l.tier===t.k).length,c:t.c,zh:t.zh}))}));
+  const max=Math.max(...rows.map(r=>r.segs.reduce((x,y)=>x+y.n,0)));
+  hbar(document.getElementById("adbar"),rows,max,document.getElementById("adlegend"),TIERS);
+}
+function confStrip(leads){
+  const el=document.getElementById("confstrip"),W=el.clientWidth||400,H=110,L=30,R=16;
+  const x=v=>L+(W-L-R)*v; const thr=0.7;
+  let s=`<svg width="100%" viewBox="0 0 ${W} ${H}" role="img">`;
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="70" y2="70"/>`;
+  [0,0.25,0.5,0.75,1].forEach(v=>s+=`<text x="${x(v)}" y="88" text-anchor="middle">${v.toFixed(2)}</text>`);
+  s+=`<line x1="${x(thr)}" x2="${x(thr)}" y1="18" y2="74" stroke="var(--text-3)" stroke-dasharray="3 3"/><text x="${x(thr)+4}" y="16">0.70 門檻</text>`;
+  const bins={}; leads.forEach(l=>{const b=Math.round(l.confidence*40)/40; bins[b]=bins[b]||[]; bins[b].push(l)});
+  Object.entries(bins).forEach(([b,arr])=>arr.forEach((l,i)=>{const cy=62-i*9; s+=`<circle class="pt" cx="${x(+b)}" cy="${cy}" r="4" fill="${T[l.tier].c}" stroke="var(--surface)" stroke-width="2" data-t="${esc(l.id)}｜${esc(T[l.tier].zh)}｜信心 ${l.confidence.toFixed(2)}"/>`}));
+  s+=`</svg>`; el.innerHTML=s;
+  el.querySelectorAll(".pt").forEach(r=>{r.addEventListener("mousemove",e=>showTip(e,r.dataset.t));r.addEventListener("mouseleave",hideTip)});
+}
+
+let FILTER="all";
+function table(leads){
+  const order=Object.fromEntries(TIERS.map((t,i)=>[t.k,i]));
+  const rows=leads.filter(l=>FILTER==="all"||l.tier===FILTER).sort((a,b)=>order[a.tier]-order[b.tier]||b.confidence-a.confidence);
+  document.querySelector("#tbl tbody").innerHTML=rows.map(l=>{const t=T[l.tier];return `<tr><td>${esc(l.id)}</td><td>${esc(l.at)}</td><td>${esc(l.ad.replace(/^Aldar-/,""))}</td><td>${esc(l.session)}</td><td><span class="pill" style="color:${t.c}">${t.icon} ${t.zh}</span></td><td><div class="confcell"><div class="conf"><i style="width:${l.confidence*100}%"></i></div>${l.confidence.toFixed(2)}</div></td><td class="act">${t.act}</td></tr>`}).join("");
+}
+function filters(leads){
+  const f=document.getElementById("filters");
+  const all=[{k:"all",zh:"全部"},...TIERS];
+  f.innerHTML=all.map(t=>`<button aria-pressed="${t.k===FILTER}" data-k="${t.k}">${t.icon?t.icon+" ":""}${t.zh}${t.k==="all"?"":" "+leads.filter(l=>l.tier===t.k).length}</button>`).join("");
+  f.querySelectorAll("button").forEach(b=>b.onclick=()=>{FILTER=b.dataset.k;filters(leads);table(leads)});
+}
+
+function render(data){
+  const leads=data.leads;
+  document.getElementById("badge").textContent=(data.demo?"示範資料 · ":"")+data.campaign+" · 更新 "+data.generated_at;
+  tiles(leads); tierChart(leads); adChart(leads); confStrip(leads); filters(leads); table(leads);
+  document.getElementById("foot").textContent=(data.note||"")+" 分級由 TypeSafe Jev（System One 決策模型）產出，每筆約 0.3 秒、成本約 NT$0.01。";
+  window.addEventListener("resize",()=>{tierChart(leads);adChart(leads);confStrip(leads)},{passive:true});
+}
+fetch("data/demo.json").then(r=>r.json()).then(render).catch(()=>{document.getElementById("badge").textContent="資料載入失敗"});
+</script>
+</body>
+</html>

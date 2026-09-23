@@ -1,0 +1,428 @@
+{
+ "campaign": "Aldar 杜拜置產說明會（新竹 10/3・台北 10/4）",
+ "generated_at": "2026-09-23 15:40",
+ "demo": true,
+ "note": "示範資料：合成名單，無真實姓名、電話、Email。正式版由 export_jev_board.py 從 Jev 分級紀錄去識別化匯出。",
+ "leads": [
+  {
+   "id": "客戶 N1",
+   "at": "09/21 17:09",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.82,
+   "worth_call": 0.83,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 Z",
+   "at": "09/21 17:11",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.83,
+   "worth_call": 0.67,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 I1",
+   "at": "09/21 19:01",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.88,
+   "worth_call": 0.58,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 F",
+   "at": "09/21 19:27",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.82,
+   "worth_call": 0.62,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 K",
+   "at": "09/21 19:34",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.65,
+   "worth_call": 0.58,
+   "tier": "review"
+  },
+  {
+   "id": "客戶 L1",
+   "at": "09/21 20:00",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.77,
+   "worth_call": 0.73,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 B1",
+   "at": "09/21 20:46",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.82,
+   "worth_call": 0.83,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 Y",
+   "at": "09/21 21:32",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.85,
+   "worth_call": 0.75,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 P1",
+   "at": "09/21 22:26",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "時間不合，待專人聯繫",
+   "quality": "reflex",
+   "confidence": 0.75,
+   "worth_call": 0.32,
+   "tier": "reflex"
+  },
+  {
+   "id": "客戶 U",
+   "at": "09/21 22:55",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.75,
+   "worth_call": 0.65,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 M",
+   "at": "09/21 23:09",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.86,
+   "worth_call": 0.53,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 M1",
+   "at": "09/22 01:51",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.82,
+   "worth_call": 0.68,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 V",
+   "at": "09/22 02:22",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.82,
+   "worth_call": 0.81,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 O1",
+   "at": "09/22 05:01",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "時間不合，待專人聯繫",
+   "quality": "reflex",
+   "confidence": 0.82,
+   "worth_call": 0.27,
+   "tier": "reflex"
+  },
+  {
+   "id": "客戶 H",
+   "at": "09/22 07:04",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.8,
+   "worth_call": 0.59,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 N",
+   "at": "09/22 07:18",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.81,
+   "worth_call": 0.63,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 J",
+   "at": "09/22 09:00",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.89,
+   "worth_call": 0.7,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 P",
+   "at": "09/22 12:38",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "reflex",
+   "confidence": 0.84,
+   "worth_call": 0.12,
+   "tier": "reflex"
+  },
+  {
+   "id": "客戶 S",
+   "at": "09/22 12:53",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.81,
+   "worth_call": 0.72,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 A",
+   "at": "09/22 17:16",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.78,
+   "worth_call": 0.78,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 D1",
+   "at": "09/22 17:37",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.88,
+   "worth_call": 0.52,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 X",
+   "at": "09/22 17:52",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.74,
+   "worth_call": 0.51,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 G",
+   "at": "09/22 22:38",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.86,
+   "worth_call": 0.72,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 B",
+   "at": "09/22 22:56",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.85,
+   "worth_call": 0.68,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 J1",
+   "at": "09/23 01:14",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.76,
+   "worth_call": 0.55,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 T",
+   "at": "09/23 01:17",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.89,
+   "worth_call": 0.52,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 D",
+   "at": "09/23 01:24",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "reflex",
+   "confidence": 0.86,
+   "worth_call": 0.19,
+   "tier": "reflex"
+  },
+  {
+   "id": "客戶 L",
+   "at": "09/23 01:31",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "時間不合，待專人聯繫",
+   "quality": "reflex",
+   "confidence": 0.78,
+   "worth_call": 0.33,
+   "tier": "reflex"
+  },
+  {
+   "id": "客戶 A1",
+   "at": "09/23 02:00",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.9,
+   "worth_call": 0.72,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 E1",
+   "at": "09/23 03:37",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.53,
+   "worth_call": 0.48,
+   "tier": "review"
+  },
+  {
+   "id": "客戶 O",
+   "at": "09/23 07:17",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.87,
+   "worth_call": 0.83,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 H1",
+   "at": "09/23 08:18",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.8,
+   "worth_call": 0.64,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 Q",
+   "at": "09/23 08:57",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.91,
+   "worth_call": 0.55,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 K1",
+   "at": "09/23 11:33",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.89,
+   "worth_call": 0.52,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 E",
+   "at": "09/23 12:04",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.83,
+   "worth_call": 0.65,
+   "tier": "priority"
+  },
+  {
+   "id": "客戶 F1",
+   "at": "09/23 14:00",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.61,
+   "worth_call": 0.52,
+   "tier": "review"
+  },
+  {
+   "id": "客戶 W",
+   "at": "09/23 14:25",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "invalid",
+   "confidence": 0.74,
+   "worth_call": 0.07,
+   "tier": "invalid"
+  },
+  {
+   "id": "客戶 I",
+   "at": "09/23 17:07",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.8,
+   "worth_call": 0.53,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 C1",
+   "at": "09/23 18:47",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "時間不合，待專人聯繫",
+   "quality": "reflex",
+   "confidence": 0.73,
+   "worth_call": 0.14,
+   "tier": "reflex"
+  },
+  {
+   "id": "客戶 C",
+   "at": "09/23 23:08",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 10:00",
+   "quality": "genuine",
+   "confidence": 0.91,
+   "worth_call": 0.53,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 G1",
+   "at": "09/24 00:30",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.81,
+   "worth_call": 0.63,
+   "tier": "normal"
+  },
+  {
+   "id": "客戶 R",
+   "at": "09/24 00:58",
+   "ad": "Aldar-薩迪亞特島",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.86,
+   "worth_call": 0.63,
+   "tier": "normal"
+  }
+ ]
+}
