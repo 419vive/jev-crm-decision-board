@@ -1,6 +1,6 @@
 {
  "campaign": "Aldar 杜拜置產說明會（新竹 10/3・台北 10/4）",
- "generated_at": "2026-09-25 14:28",
+ "generated_at": "2026-09-25 18:54",
  "demo": false,
  "note": "去識別化資料：姓名以代號取代，無電話、Email。",
  "leads": [
@@ -243,6 +243,16 @@
    "confidence": 0.44,
    "worth_call": 0.69,
    "tier": "review"
+  },
+  {
+   "id": "客戶 Y",
+   "at": "09/26 02:54",
+   "ad": "Aldar-亞斯島迪士尼",
+   "session": "【新竹】10/03(六) 14:00",
+   "quality": "genuine",
+   "confidence": 0.83,
+   "worth_call": 0.67,
+   "tier": "priority"
   }
  ]
 }
