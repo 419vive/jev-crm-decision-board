@@ -1,6 +1,6 @@
 {
  "campaign": "Aldar 杜拜置產說明會（新竹 10/3・台北 10/4）",
- "generated_at": "2026-09-29 20:23",
+ "generated_at": "2026-09-30 02:19",
  "demo": false,
  "note": "去識別化資料：姓名以代號取代，無電話、Email。",
  "leads": [
@@ -393,6 +393,16 @@
    "confidence": 0.73,
    "worth_call": 0.54,
    "tier": "reflex"
+  },
+  {
+   "id": "客戶 N1",
+   "at": "09/30 10:19",
+   "ad": "Aldar-續集對白",
+   "session": "【台北】10/04(日) 14:00",
+   "quality": "genuine",
+   "confidence": 0.56,
+   "worth_call": 0.62,
+   "tier": "review"
   }
  ]
 }
